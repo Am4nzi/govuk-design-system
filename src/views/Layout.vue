@@ -5,17 +5,17 @@
     <div class="govuk-width-container">
       <main class="govuk-main-wrapper" id="main-content" role="main">
         <div
-            :class="{
-          'govuk-form-group': formErrorIsActive,
-          'govuk-form-group--error': formErrorIsActive,
-        }"
+          :class="{
+            'govuk-form-group': formErrorIsActive,
+            'govuk-form-group--error': formErrorIsActive,
+          }"
         >
-    <router-view />
+          <router-view />
         </div>
-    <GovukButton
-        button-text="Continue"
-        :button-action="navigateToNextRoute"
-    />
+        <GovukButton
+          button-text="Continue"
+          :button-action="navigateToNextRoute"
+        />
       </main>
     </div>
     <GovukFooter />
