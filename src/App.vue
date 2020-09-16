@@ -6,8 +6,10 @@
 
 <script>
 import Vue from "vue";
+import Vuelidate from 'vuelidate'
 import getAndSetFormValues from "./mixins/getAndSetFormValues";
 
+Vue.use(Vuelidate)
 Vue.mixin(getAndSetFormValues);
 
 export default {
