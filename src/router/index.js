@@ -5,8 +5,7 @@ import Questions from "../views/Questions.vue";
 import SummaryList from "../views/SummaryList.vue";
 import FormQuestionName from "../views/FormQuestionName.vue";
 import FormQuestionDOB from "../views/FormQuestionDOB.vue";
-import GovukFieldset from "../components/GovukFieldset.vue";
-import GovukFormGroup from "../components/GovukFormGroup.vue";
+import FormQuestionGender from "../views/FormQuestionGender.vue";
 
 Vue.use(VueRouter);
 
@@ -32,14 +31,8 @@ const routes = [
           },
           {
             path: "/gender",
-            component: GovukFieldset,
-            children: [
-              {
-                path: "/gender",
-                name: "Gender",
-                component: GovukFormGroup,
-              },
-            ],
+            name: 'Gender',
+            component: FormQuestionGender,
           },
         ],
       },
