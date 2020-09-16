@@ -4,9 +4,9 @@ import Layout from "../views/Layout.vue";
 import Questions from "../views/Questions.vue";
 import SummaryList from "../views/SummaryList.vue";
 import FormQuestionName from "../views/FormQuestionName.vue";
+import FormQuestionDOB from "../views/FormQuestionDOB.vue";
 import GovukFieldset from "../components/GovukFieldset.vue";
 import GovukFormGroup from "../components/GovukFormGroup.vue";
-import GovukDateInput from "../components/GovukDateInput.vue";
 
 Vue.use(VueRouter);
 
@@ -27,20 +27,8 @@ const routes = [
           },
           {
             path: "/date-of-birth",
-            component: GovukFieldset,
-            children: [
-              {
-                path: "/date-of-birth",
-                component: GovukFormGroup,
-                children: [
-                  {
-                    path: "/date-of-birth",
-                    name: "Date of birth",
-                    component: GovukDateInput,
-                  },
-                ],
-              },
-            ],
+            name: "Date of birth",
+            component: FormQuestionDOB,
           },
           {
             path: "/gender",
