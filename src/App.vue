@@ -7,9 +7,11 @@
 <script>
 import Vue from "vue";
 import Vuelidate from 'vuelidate'
+import validations from "./mixins/validations";
 import getAndSetFormValues from "./mixins/getAndSetFormValues";
 
 Vue.use(Vuelidate)
+Vue.mixin(validations);
 Vue.mixin(getAndSetFormValues);
 
 export default {
