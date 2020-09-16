@@ -69,10 +69,7 @@ export default {
           return {
             errorMessage: this.errorMessage,
             label: "",
-            radioOptions: {
-              male: "Male",
-              female: "Female",
-            },
+            hasRadioOptions: true,
           };
         default:
           return "";

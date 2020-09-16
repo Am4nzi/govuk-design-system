@@ -7,7 +7,6 @@ import GovukFieldset from "../components/GovukFieldset.vue";
 import GovukFormGroup from "../components/GovukFormGroup.vue";
 import GovukInput from "../components/GovukInput.vue";
 import GovukDateInput from "../components/GovukDateInput.vue";
-import GovukRadios from "../components/GovukRadios.vue";
 
 Vue.use(VueRouter);
 
@@ -62,14 +61,8 @@ const routes = [
             children: [
               {
                 path: "/gender",
+                name: "Gender",
                 component: GovukFormGroup,
-                children: [
-                  {
-                    path: "/gender",
-                    name: "Gender",
-                    component: GovukRadios,
-                  },
-                ],
               },
             ],
           },
