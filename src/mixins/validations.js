@@ -1,3 +1,5 @@
+import { validationMixin } from 'vuelidate';
+
 export default {
-  validations: {},
+  mixins: [validationMixin],
 };
