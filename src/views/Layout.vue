@@ -6,8 +6,8 @@
       <main class="govuk-main-wrapper" id="main-content" role="main">
         <div
           :class="{
-            'govuk-form-group': formErrorIsActive,
-            'govuk-form-group--error': formErrorIsActive,
+            'govuk-form-group': true,
+            'govuk-form-group--error': true,
           }"
         >
           <router-view />
@@ -26,12 +26,14 @@
 import GovukHeader from "../components/GovukHeader";
 import GovukBackLink from "../components/GovukBackLink";
 import GovukFooter from "../components/GovukFooter";
+import GovukButton from "../components/GovukButton";
 export default {
   name: "Layout",
   components: {
     GovukHeader,
     GovukBackLink,
     GovukFooter,
+    GovukButton
   },
   methods: {
     getPreviousRoute() {
