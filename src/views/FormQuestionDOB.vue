@@ -1,4 +1,7 @@
 <template>
+  <fieldset class="govuk-fieldset">
+    <GovukFieldsetLegend legend-text="What is your date of birth?" />
+    <GovukErrorMessage v-if="true" error-message="Dummy Message" />
   <div>
     <div id="dob-hint" class="govuk-hint">
       "For example, 31 3 1980"
@@ -54,10 +57,17 @@
       </div>
     </div>
   </div>
+  </fieldset>
 </template>
 
 <script>
+import GovukErrorMessage from "../components/GovukErrorMessage";
+import GovukFieldsetLegend from "../components/GovukFieldsetLegend";
 export default {
   name: "FormQuestionDOB",
+  components: {
+    GovukErrorMessage,
+    GovukFieldsetLegend,
+  },
 };
 </script>
