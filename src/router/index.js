@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Layout from "../views/Layout.vue";
-import Questions from "../views/Questions.vue";
 import SummaryList from "../views/SummaryList.vue";
 import FormQuestionName from "../views/FormQuestionName.vue";
 import FormQuestionDOB from "../views/FormQuestionDOB.vue";
@@ -14,11 +13,6 @@ const routes = [
     path: "/",
     component: Layout,
     children: [
-      {
-        path: "/",
-        redirect: "/name",
-        component: Questions,
-        children: [
           {
             path: "/name",
             name: "Name",
@@ -41,8 +35,6 @@ const routes = [
         name: "Summary List",
         component: SummaryList,
       },
-    ],
-  },
 ];
 
 const router = new VueRouter({

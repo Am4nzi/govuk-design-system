@@ -6,11 +6,11 @@
 
 <script>
 import Vue from "vue";
+import Vuelidate from 'vuelidate'
 import getAndSetFormValues from "./mixins/getAndSetFormValues";
-import validations from "./mixins/validations";
 
+Vue.use(Vuelidate)
 Vue.mixin(getAndSetFormValues);
-Vue.mixin(validations);
 
 export default {
   name: "App",

@@ -2,7 +2,22 @@
   <div>
     <GovukHeader />
     <GovukBackLink :link-action="navigateToPreviousRoute" />
+    <div class="govuk-width-container">
+      <main class="govuk-main-wrapper" id="main-content" role="main">
+        <div
+            :class="{
+          'govuk-form-group': formErrorIsActive,
+          'govuk-form-group--error': formErrorIsActive,
+        }"
+        >
     <router-view />
+        </div>
+    <GovukButton
+        button-text="Continue"
+        :button-action="navigateToNextRoute"
+    />
+      </main>
+    </div>
     <GovukFooter />
   </div>
 </template>
@@ -30,9 +45,23 @@ export default {
           return "Name";
       }
     },
+    getNextRoute() {
+      const { name } = this.$route;
+      switch (name) {
+        case "Name":
+          return "Date of birth";
+        case "Date of birth":
+          return "Gender";
+        case "Gender":
+          return "Summary List";
+      }
+    },
     navigateToPreviousRoute() {
       this.$store.dispatch("updateFormErrorIsActive", false);
       this.$router.push({ name: this.getPreviousRoute() });
+    },
+    navigateToNextRoute() {
+      this.$router.push({ name: this.getNextRoute() });
     },
   },
 };
