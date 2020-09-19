@@ -15,6 +15,21 @@ export default new Vuex.Store({
       month: "",
       year: "",
     },
+    questionData: [
+      {
+        name: "Name",
+        slug: 'name'
+      },
+      {
+        name: "Date of Birth",
+        slug: 'date-of-birth'
+      },
+      {
+        name: "Gender",
+        slug: 'gender'
+      },
+    ]
+    ,
     formErrorIsActive: false,
   },
   mutations: {
