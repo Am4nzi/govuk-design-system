@@ -14,23 +14,23 @@ const routes = [
   },
   {
     path: "/name",
-    name: "Name",
+    name: "name",
     component: FormQuestionName,
   },
   {
     path: "/date-of-birth",
-    name: "Date of birth",
+    name: "dateOfBirth",
     component: FormQuestionDOB,
   },
   {
     path: "/gender",
-    name: "Gender",
+    name: "gender",
     component: FormQuestionGender,
   },
 
   {
     path: "/summary-list",
-    name: "Summary List",
+    name: "summaryList",
     component: SummaryList,
   },
 ];
