@@ -1,6 +1,6 @@
 <template>
   <fieldset class="govuk-fieldset">
-    <GovukFieldsetLegend legend-text="What is your name?" />
+    <GovukFieldsetLegend legend-text="What is your gender?" />
     <GovukErrorMessage v-if="true" error-message="Dummy Message" />
     <div class="govuk-form-group">
       <div>
