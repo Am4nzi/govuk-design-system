@@ -83,7 +83,7 @@ export default new Vuex.Store({
     dateOfBirthMonth: (state) => state.dateOfBirthRawValues.month,
     dateOfBirthYear: (state) => state.dateOfBirthRawValues.year,
     questionsData: (state) => state.questionsData,
-    totalQuestions: (state) => state.questionData.length,
+    totalQuestions: (state) => state.questionsData.length,
   },
   actions: {
     updateFormErrorIsActive: (context, value) =>
