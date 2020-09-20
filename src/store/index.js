@@ -15,18 +15,26 @@ export default new Vuex.Store({
       month: "",
       year: "",
     },
-    questionData: [
+    questionsData: [
       {
-        name: "Name",
-        slug: 'name'
+        questionName: "name",
+        questionSlug: 'name',
+        questionId: 1,
       },
       {
-        name: "Date of Birth",
-        slug: 'date-of-birth'
+        questionName: "dateOfBirth",
+        questionSlug: 'date-of-birth',
+        questionId: 2,
       },
       {
-        name: "Gender",
-        slug: 'gender'
+        questionName: "gender",
+        questionSlug: 'gender',
+        questionId: 3,
+      },
+      {
+        questionName: "summaryList",
+        questionSlug: 'summary-list',
+        questionId: 3,
       },
     ]
     ,
@@ -74,6 +82,8 @@ export default new Vuex.Store({
     dateOfBirthDay: (state) => state.dateOfBirthRawValues.day,
     dateOfBirthMonth: (state) => state.dateOfBirthRawValues.month,
     dateOfBirthYear: (state) => state.dateOfBirthRawValues.year,
+    questionsData: (state) => state.questionsData,
+    totalQuestions: (state) => state.questionData.length,
   },
   actions: {
     updateFormErrorIsActive: (context, value) =>

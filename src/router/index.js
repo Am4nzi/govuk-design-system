@@ -10,7 +10,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: { name: "Name" },
+    redirect: { name: "name" },
   },
   {
     path: "/name",
@@ -27,7 +27,6 @@ const routes = [
     name: "gender",
     component: FormQuestionGender,
   },
-
   {
     path: "/summary-list",
     name: "summaryList",

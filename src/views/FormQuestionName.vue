@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {required} from "vuelidate/lib/validators";
+import { required } from "vuelidate/lib/validators";
 import GovukErrorMessage from "../components/GovukErrorMessage";
 import GovukFieldsetLegend from "../components/GovukFieldsetLegend";
 import GovukLabel from "../components/GovukLabel";
@@ -26,8 +26,17 @@ export default {
   },
   validations: {
     name: {
-      required
+      required,
     },
-  }
+  },
+  methods: {
+    navigateToPreviousRoute() {
+      this.$store.dispatch("updateFormErrorIsActive", false);
+      this.$router.push({ name: this.getPreviousRoute() });
+    },
+    navigateToNextRoute() {
+      console.log("this worked");
+    },
+  },
 };
 </script>
