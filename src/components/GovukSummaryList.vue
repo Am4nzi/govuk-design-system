@@ -1,19 +1,24 @@
 <template>
   <div>
     <dl class="govuk-summary-list" v-for="(item, key) in formData" :key="item">
-      <GovukSummaryListRow :form-data-values="item" :form-data-keys="key" />
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">{{ key }}</dt>
+        <dd class="govuk-summary-list__value">Placeholder Values</dd>
+        <dd class="govuk-summary-list__actions">
+          <router-link :to="{ name: `name` }"
+            >Change<span class="govuk-visually-hidden">
+              contact information</span
+            ></router-link
+          >
+        </dd>
+      </div>
     </dl>
   </div>
 </template>
 
 <script>
-import GovukSummaryListRow from "../components/GovukSummaryListRow";
-
 export default {
   name: "GovukSummaryList",
-  components: {
-    GovukSummaryListRow,
-  },
   props: {
     formData: Object,
   },
