@@ -10,11 +10,6 @@ export default new Vuex.Store({
       "Date of birth": null,
       Gender: null,
     },
-    dateOfBirthRawValues: {
-      day: "",
-      month: "",
-      year: "",
-    },
     questionsData: [
       {
         questionName: "name",
@@ -31,13 +26,7 @@ export default new Vuex.Store({
         questionSlug: 'gender',
         questionId: 3,
       },
-      {
-        questionName: "summaryList",
-        questionSlug: 'summary-list',
-        questionId: 3,
-      },
-    ]
-    ,
+    ],
     formErrorIsActive: false,
   },
   mutations: {
@@ -83,7 +72,7 @@ export default new Vuex.Store({
     dateOfBirthMonth: (state) => state.dateOfBirthRawValues.month,
     dateOfBirthYear: (state) => state.dateOfBirthRawValues.year,
     questionsData: (state) => state.questionsData,
-    totalQuestions: (state) => state.questionsData.length,
+    totalQuestions: (state) => state.questionsData.length -1,
   },
   actions: {
     updateFormErrorIsActive: (context, value) =>
