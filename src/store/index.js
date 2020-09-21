@@ -28,11 +28,13 @@ export default new Vuex.Store({
       },
     ],
     formErrorIsActive: false,
+    summaryListActive: false,
   },
   mutations: {
     setFormErrorIsActive: (state, value) => (state.formErrorIsActive = value),
     setFormDataFirstName: (state, value) => (state.formData["Name"] = value),
     setUserDetails: (state, userDetails) => (state.userDetails = userDetails),
+    setSummaryListActive: (state, summaryListActiveState) => (state.summaryListActive = summaryListActiveState),
   },
   getters: {
     formErrorIsActive: (state) => state.formErrorIsActive,
@@ -44,10 +46,13 @@ export default new Vuex.Store({
     dateOfBirthYear: (state) => state.dateOfBirthRawValues.year,
     questionsData: (state) => state.questionsData,
     totalQuestions: (state) => state.questionsData.length - 1,
+    summaryListActiveStatus: (state) => state.summaryListActive,
   },
   actions: {
     updateFormErrorIsActive: (context, value) =>
       context.commit("setFormErrorIsActive", value),
+    updateSummaryListActive: (context, value) =>
+        context.commit("setSummaryListActive", value),
     updateUserDetails(context, formData) {
       let userDetails = {};
       //Convert keys from sentence case to camelCase

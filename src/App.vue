@@ -17,7 +17,7 @@
             <router-view @input="getQuestionInputValue" :form-data="formData" />
           </div>
           <GovukButton
-            :button-text="summaryListActive ? 'Submit' : 'Continue'"
+            :button-text="summaryListActiveStatus ? 'Submit' : 'Continue'"
             :button-action="navigateToNextRoute"
           />
         </main>
@@ -62,7 +62,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["questionsData", "totalQuestions"]),
+    ...mapGetters(["questionsData", "totalQuestions", "summaryListActiveStatus"]),
     currentQuestionName() {
       return this.questionsData[this.currentQuestionNumber].questionName;
     },
@@ -81,16 +81,16 @@ export default {
     },
     navigateToPreviousRoute() {
       this.currentQuestionNumber--;
+      this.summaryListActive = false;
       this.$router.push({ name: this.currentQuestionName });
     },
     navigateToNextRoute() {
-      //TODO add conditional here. If Vuex is populated go straight to summary
       if (this.summaryListActive) {
         this.submitFormDataToStore();
         return;
       } else if (this.currentQuestionNumber === this.totalQuestions) {
         this.$router.push({ name: "summaryList" });
-        this.summaryListActive = true;
+        this.$store.dispatch("updateSummaryListActive", true);
       } else {
         this.currentQuestionNumber++;
         this.$router.push({ name: this.currentQuestionName });
