@@ -10,21 +10,21 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: { name: "name" },
+    redirect: { name: "Name" },
   },
   {
     path: "/name",
-    name: "name",
+    name: "Name",
     component: FormQuestionName,
   },
   {
     path: "/date-of-birth",
-    name: "dateOfBirth",
+    name: "Date of Birth",
     component: FormQuestionDOB,
   },
   {
     path: "/gender",
-    name: "gender",
+    name: "Gender",
     component: FormQuestionGender,
   },
   {

@@ -6,7 +6,6 @@
 </template>
 
 <script>
-const mapGetters = require("vuex")["mapGetters"];
 import GovukSummaryList from "../components/GovukSummaryList";
 import GovukFieldsetLegend from "../components/GovukFieldsetLegend";
 
@@ -15,12 +14,12 @@ export default {
   data: () => ({
     legendText: "Please review your details before submission",
   }),
+  props: {
+    formData: Object,
+  },
   components: {
     GovukSummaryList,
     GovukFieldsetLegend,
-  },
-  computed: {
-    ...mapGetters(["formData"]),
   },
 };
 </script>

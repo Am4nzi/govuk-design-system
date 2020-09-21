@@ -12,17 +12,17 @@ export default new Vuex.Store({
     },
     questionsData: [
       {
-        questionName: "name",
+        questionName: "Name",
         questionSlug: 'name',
         questionId: 1,
       },
       {
-        questionName: "dateOfBirth",
+        questionName: "Date of Birth",
         questionSlug: 'date-of-birth',
         questionId: 2,
       },
       {
-        questionName: "gender",
+        questionName: "Gender",
         questionSlug: 'gender',
         questionId: 3,
       },

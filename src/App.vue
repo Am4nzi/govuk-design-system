@@ -14,7 +14,7 @@
               'govuk-form-group--error': true,
             }"
           >
-            <router-view @input="getQuestionInputValue" />
+            <router-view @input="getQuestionInputValue" :form-data="formData" />
           </div>
           <GovukButton
             :button-text="summaryListActive ? 'Submit' : 'Continue'"
@@ -53,14 +53,11 @@ export default {
       currentQuestionNumber: 0,
       currentQuestionInputValue: null,
       summaryListActive: false,
+      questionProperties: {},
       formData: {
-        name: null,
-        dateOfBirth: {
-          day: null,
-          month: null,
-          year: null,
-        },
-        gender: null,
+        ["Name"]: null,
+        ["Date of Birth"]: null,
+        ["Gender"]: null,
       },
     };
   },
@@ -73,9 +70,11 @@ export default {
   methods: {
     getQuestionInputValue(questionInputValues, questionProperty) {
       if (questionProperty) {
-        this.formData[this.currentQuestionName][
-          questionProperty
-        ] = questionInputValues;
+        this.questionProperties[questionProperty] = questionInputValues;
+        let questionPropertiesArray = Object.values(this.questionProperties);
+        this.formData[this.currentQuestionName] = questionPropertiesArray.join(
+          " "
+        );
       } else {
         this.formData[this.currentQuestionName] = questionInputValues;
       }
