@@ -5,24 +5,16 @@
     <div class="govuk-form-group">
       <div>
         <div class="govuk-radios govuk-radios--inline">
-          <div class="govuk-radios__item">
-            <input
-              v-model="inputValue"
-              class="govuk-radios__input"
-              type="radio"
-              value="Male"
-            />
-            <label class="govuk-label govuk-radios__label"> Male </label>
-          </div>
-          <div class="govuk-radios__item">
-            <input
-              v-model="inputValue"
-              class="govuk-radios__input"
-              type="radio"
-              value="Female"
-            />
-            <label class="govuk-label govuk-radios__label"> Female </label>
-          </div>
+          <govukRadios
+            inputValue="Male"
+            label="Male"
+            @input="getQuestionInputValue"
+          />
+          <govukRadios
+            inputValue="Female"
+            label="Female"
+            @input="getQuestionInputValue"
+          />
         </div>
       </div>
     </div>
@@ -32,11 +24,19 @@
 <script>
 import GovukErrorMessage from "../components/GovukErrorMessage";
 import GovukFieldsetLegend from "../components/GovukFieldsetLegend";
+import GovukRadios from "../components/GovukRadios";
 export default {
-  name: "FormQuestionGender",
+  name: "GovukRadioInput",
+  inheritAttrs: false,
   components: {
     GovukErrorMessage,
     GovukFieldsetLegend,
+    GovukRadios,
+  },
+  methods: {
+    getQuestionInputValue(questionInputValue) {
+      this.$emit("input", questionInputValue);
+    },
   },
 };
 </script>

@@ -14,7 +14,7 @@
               'govuk-form-group--error': true,
             }"
           >
-            <router-view />
+            <router-view @input="getQuestionInputValue" />
           </div>
           <GovukButton
             button-text="Continue"
@@ -51,6 +51,16 @@ export default {
   data: () => {
     return {
       currentQuestionNumber: 0,
+      currentQuestionInputValue: null,
+      formData: {
+        name: null,
+        dateOfBirth: {
+          day: null,
+          month: null,
+          year: null,
+        },
+        gender: null,
+      },
     };
   },
   computed: {
@@ -60,6 +70,15 @@ export default {
     },
   },
   methods: {
+    getQuestionInputValue(questionInputValues, questionProperty) {
+      if (questionProperty) {
+        this.formData[this.currentQuestionName][
+          questionProperty
+        ] = questionInputValues;
+      } else {
+        this.formData[this.currentQuestionName] = questionInputValues;
+      }
+    },
     navigateToPreviousRoute() {
       this.currentQuestionNumber--;
       this.$router.push({ name: this.currentQuestionName });

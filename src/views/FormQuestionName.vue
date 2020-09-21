@@ -5,7 +5,12 @@
     <div class="govuk-form-group">
       <GovukLabel form-question-label="Full name" />
       <div>
-        <input v-model="inputValue" class="govuk-input" autocomplete="on" />
+        <input
+          class="govuk-input"
+          @change="$emit('input', $event.target.value)"
+          v-on="listeners"
+          v-bind="$attrs"
+        />
       </div>
     </div>
   </fieldset>
@@ -29,14 +34,11 @@ export default {
       required,
     },
   },
-  methods: {
-    navigateToPreviousRoute() {
-      this.$store.dispatch("updateFormErrorIsActive", false);
-      this.$router.push({ name: this.getPreviousRoute() });
+  computed: {
+    listeners() {
+      const { ...listeners } = this.$listeners;
+      return listeners;
     },
-    navigateToNextRoute() {
-      console.log("this worked");
-    },
-  },
+  }
 };
 </script>
