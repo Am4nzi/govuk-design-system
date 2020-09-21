@@ -1,22 +1,20 @@
 <template>
   <div class="govuk-summary-list__row">
-    <GovukSummaryListKey :form-data-keys="formDataKeys" />
-    <GovukSummaryListValue :form-data-values="formDataValues" />
-    <GovukSummaryListActions :form-data-keys="formDataKeys" />
+    <dt class="govuk-summary-list__key">Placeholder Keys</dt>
+    <dd class="govuk-summary-list__value">Placeholder Values</dd>
+    <dd class="govuk-summary-list__actions">
+      <router-link :to="{ name: `name` }"
+      >Change<span class="govuk-visually-hidden">
+        contact information</span
+      ></router-link
+      >
+    </dd>
   </div>
 </template>
 
 <script>
-import GovukSummaryListKey from "../components/GovukSummaryListKey";
-import GovukSummaryListValue from "../components/GovukSummaryListValue";
-import GovukSummaryListActions from "../components/GovukSummaryListActions";
 export default {
   name: "GovukSummaryListRow",
-  components: {
-    GovukSummaryListKey,
-    GovukSummaryListValue,
-    GovukSummaryListActions,
-  },
   props: {
     formDataValues: String,
     formDataKeys: String,
