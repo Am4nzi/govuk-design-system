@@ -77,6 +77,9 @@ export default new Vuex.Store({
   actions: {
     updateFormErrorIsActive: (context, value) =>
       context.commit("setFormErrorIsActive", value),
+    updateUserDetails(context, formData) {
+      console.log('formData in actions: ', formData);
+    },
+
   },
-  modules: {},
 });
