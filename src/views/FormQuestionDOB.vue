@@ -12,6 +12,10 @@
         v-if="$v.inputValue.$dirty && !$v.inputValue.dayRequired"
         error-message="Please enter your full date of birth"
       />
+      <GovukErrorMessage
+          v-if="$v.inputValue.$dirty && !$v.inputValue.mustBeNumber"
+          error-message="Date of birth must be a number"
+      />
       <div>
         <div id="dob-hint" class="govuk-hint">"For example, 31 3 1980"</div>
         <div class="govuk-date-input">
@@ -90,7 +94,7 @@
 <script>
 import GovukErrorMessage from "../components/GovukErrorMessage";
 import GovukFieldsetLegend from "../components/GovukFieldsetLegend";
-import { minLength, required } from "vuelidate/lib/validators";
+import { required } from "vuelidate/lib/validators";
 export default {
   name: "FormQuestionDOB",
   components: {
@@ -136,8 +140,8 @@ export default {
   validations: {
     inputValue: {
       required,
-      minLength: minLength(4),
       dayRequired: (value) => value.length === 10,
+      mustBeNumber: value => /^[0-9]+ [0-9]+ [0-9]+$/.test(value)
     },
   },
   methods: {
@@ -151,7 +155,7 @@ export default {
       this.inputValueYear = value;
     },
     setInputValue(value) {
-      this.$store.dispatch("updateValidData", value);
+      this.$store.dispatch("updateCurrentQuestionInputValue", value);
     },
     validateInputValue(value) {
       this.inputValue = value;
