@@ -10,16 +10,15 @@
       <GovukFieldsetLegend legend-text="What is your name?" />
       <GovukErrorMessage
         v-if="$v.inputValue.$dirty && !$v.inputValue.required"
-        error-message="Name is required"
+        error-message="Please enter your full name"
       />
       <div
         class="govuk-form-group"
         :class="{ 'form-group--error': $v.inputValue.$error }"
       >
-        <GovukLabel form-question-label="Full name" />
+        <GovukLabel form-question-label="Full name"/>
         <div>
           <input
-            ref="myRef"
             class="govuk-input form__input"
             :value="inputValue"
             @change="$emit('input', $event.target.value)"
@@ -48,8 +47,6 @@ export default {
   },
   data: () => {
     return {
-      name: "",
-      age: 0,
       inputValue: "",
     };
   },
@@ -73,7 +70,7 @@ export default {
   },
   methods: {
     setInputValue(value) {
-      this.$store.dispatch("updateValidData", value);
+      this.$store.dispatch("updateCurrentQuestionInputValue", value);
     },
     validateInputValue(value) {
       this.inputValue = value;

@@ -36,7 +36,7 @@ export default new Vuex.Store({
   actions: {
     updateAllQuestionsAnswered: (context, value) =>
       context.commit("setAllQuestionsAnswered", value),
-    updateValidData: (context, value) =>
+    updateCurrentQuestionInputValue: (context, value) =>
       context.commit("setCurrentQuestionInputValue", value),
     updateSummaryListActive: (context, value) =>
       context.commit("setSummaryListActive", value),
