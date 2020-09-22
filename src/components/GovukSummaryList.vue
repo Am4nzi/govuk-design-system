@@ -24,9 +24,8 @@ export default {
   },
   methods: {
     navigateToQuestion(questionName) {
-      this.$store.dispatch("updateSummaryListActive", false);
       this.$router.push({ name: questionName });
     }
-  }
+  },
 };
 </script>

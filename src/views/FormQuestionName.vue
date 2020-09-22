@@ -7,6 +7,7 @@
       <div>
         <input
           class="govuk-input"
+          :value="inputValue"
           @change="$emit('input', $event.target.value)"
           v-on="listeners"
           v-bind="$attrs"
@@ -29,6 +30,17 @@ export default {
     GovukFieldsetLegend,
     GovukLabel,
   },
+  data: () => {
+    return {
+      inputValue: '',
+    }
+  },
+  props: {
+    formData: {
+      type: Object,
+      required: true,
+    },
+  },
   validations: {
     name: {
       required,
@@ -39,6 +51,9 @@ export default {
       const { ...listeners } = this.$listeners;
       return listeners;
     },
-  }
+  },
+  mounted() {
+    this.inputValue = this.formData['Name'];
+  },
 };
 </script>

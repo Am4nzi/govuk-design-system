@@ -26,7 +26,7 @@ import GovukErrorMessage from "../components/GovukErrorMessage";
 import GovukFieldsetLegend from "../components/GovukFieldsetLegend";
 import GovukRadios from "../components/GovukRadios";
 export default {
-  name: "GovukRadioInput",
+  name: "FormQuestionGender",
   inheritAttrs: false,
   components: {
     GovukErrorMessage,

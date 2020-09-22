@@ -55,16 +55,20 @@ export default {
       summaryListActive: false,
       questionProperties: {},
       formData: {
-        ["Name"]: null,
-        ["Date of Birth"]: null,
-        ["Gender"]: null,
+        ["Name"]: '',
+        ["Date of Birth"]: '',
+        ["Gender"]: '',
       },
     };
   },
   computed: {
     ...mapGetters(["questionsData", "totalQuestions", "summaryListActiveStatus"]),
     currentQuestionName() {
-      return this.questionsData[this.currentQuestionNumber].questionName;
+      if (this.summaryListActiveStatus) {
+        return this.$route.name;
+      } else {
+        return this.questionsData[this.currentQuestionNumber].questionName;
+      }
     },
   },
   methods: {
@@ -81,7 +85,6 @@ export default {
     },
     navigateToPreviousRoute() {
       this.currentQuestionNumber--;
-      this.summaryListActive = false;
       this.$router.push({ name: this.currentQuestionName });
     },
     navigateToNextRoute() {

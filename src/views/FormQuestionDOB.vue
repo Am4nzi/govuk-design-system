@@ -10,6 +10,7 @@
             <label class="govuk-label govuk-date-input__label"> Day </label>
             <input
               class="govuk-input govuk-date-input__input govuk-input--width-2"
+              :value="inputValueDay"
               @change="$emit('input', $event.target.value, 'day')"
               type="text"
               pattern="[0-9]*"
@@ -24,6 +25,7 @@
             <label class="govuk-label govuk-date-input__label"> Month </label>
             <input
               class="govuk-input govuk-date-input__input govuk-input--width-2"
+              :value="inputValueMonth"
               @change="$emit('input', $event.target.value, 'month')"
               type="text"
               autocomplete="on"
@@ -39,6 +41,7 @@
             <label class="govuk-label govuk-date-input__label"> Year </label>
             <input
               class="govuk-input govuk-date-input__input govuk-input--width-4"
+              :value="inputValueYear"
               @change="$emit('input', $event.target.value, 'year')"
               type="text"
               autocomplete="on"
@@ -63,11 +66,31 @@ export default {
     GovukErrorMessage,
     GovukFieldsetLegend,
   },
+  data: () => {
+    return {
+      inputValueDay: "",
+      inputValueMonth: "",
+      inputValueYear: "",
+    };
+  },
+  props: {
+    formData: {
+      type: Object,
+      required: true,
+    },
+  },
   computed: {
     listeners() {
       const { ...listeners } = this.$listeners;
       return listeners;
     },
+  },
+  mounted() {
+    if (this.formData["Date of Birth"]) {
+      this.inputValueDay = this.formData["Date of Birth"].split(" ")[0];
+      this.inputValueMonth = this.formData["Date of Birth"].split(" ")[1];
+      this.inputValueYear = this.formData["Date of Birth"].split(" ")[2];
+    }
   },
 };
 </script>
