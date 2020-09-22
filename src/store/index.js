@@ -29,14 +29,21 @@ export default new Vuex.Store({
     ],
     formErrorIsActive: false,
     summaryListActive: false,
+    allQuestionsAnswered: false,
+    currentQuestionInputValue: "",
   },
   mutations: {
+    setAllQuestionsAnswered: (state, value) => (state.allQuestionsAnswered = value),
+    setCurrentQuestionInputValue: (state, value) =>
+      (state.currentQuestionInputValue = value),
     setFormErrorIsActive: (state, value) => (state.formErrorIsActive = value),
     setFormDataFirstName: (state, value) => (state.formData["Name"] = value),
     setUserDetails: (state, userDetails) => (state.userDetails = userDetails),
-    setSummaryListActive: (state, summaryListActiveState) => (state.summaryListActive = summaryListActiveState),
+    setSummaryListActive: (state, summaryListActiveState) =>
+      (state.summaryListActive = summaryListActiveState),
   },
   getters: {
+    allQuestionsAnswered: (state) => state.allQuestionsAnswered,
     formErrorIsActive: (state) => state.formErrorIsActive,
     formData: (state) => state.formData,
     nameValue: (state) => state.formData["Name"],
@@ -47,12 +54,17 @@ export default new Vuex.Store({
     questionsData: (state) => state.questionsData,
     totalQuestions: (state) => state.questionsData.length - 1,
     summaryListActiveStatus: (state) => state.summaryListActive,
+    inputValue: (state) => state.currentQuestionInputValue,
   },
   actions: {
+    updateAllQuestionsAnswered: (context, value) =>
+        context.commit("setAllQuestionsAnswered", value),
+    updateValidData: (context, value) =>
+      context.commit("setCurrentQuestionInputValue", value),
     updateFormErrorIsActive: (context, value) =>
       context.commit("setFormErrorIsActive", value),
     updateSummaryListActive: (context, value) =>
-        context.commit("setSummaryListActive", value),
+      context.commit("setSummaryListActive", value),
     updateUserDetails(context, formData) {
       let userDetails = {};
       //Convert keys from sentence case to camelCase
@@ -65,7 +77,7 @@ export default new Vuex.Store({
             .replace(/\s+/g, "")
         ] = `${formData[property]}\``;
       }
-      context.commit("setUserDetails", userDetails)
+      context.commit("setUserDetails", userDetails);
     },
   },
 });

@@ -1,24 +1,40 @@
 <template>
-  <fieldset class="govuk-fieldset">
-    <GovukFieldsetLegend legend-text="What is your name?" />
-    <GovukErrorMessage v-if="!$v.name.required" error-message="Dummy Message" />
-    <div class="govuk-form-group">
-      <GovukLabel form-question-label="Full name" />
-      <div>
-        <input
-          class="govuk-input"
-          :value="inputValue"
-          @change="$emit('input', $event.target.value)"
-          v-on="listeners"
-          v-bind="$attrs"
-        />
+  <div
+    class="govuk-form-group"
+    :class="{
+      'govuk-form-group--error':
+        $v.inputValue.$dirty && !$v.inputValue.required,
+    }"
+  >
+    <fieldset class="govuk-fieldset">
+      <GovukFieldsetLegend legend-text="What is your name?" />
+      <GovukErrorMessage
+        v-if="$v.inputValue.$dirty && !$v.inputValue.required"
+        error-message="Name is required"
+      />
+      <div
+        class="govuk-form-group"
+        :class="{ 'form-group--error': $v.inputValue.$error }"
+      >
+        <GovukLabel form-question-label="Full name" />
+        <div>
+          <input
+            ref="myRef"
+            class="govuk-input form__input"
+            :value="inputValue"
+            @change="$emit('input', $event.target.value)"
+            @input="setInputValue($event.target.value)"
+            v-on="listeners"
+            v-bind="$attrs"
+          />
+        </div>
       </div>
-    </div>
-  </fieldset>
+    </fieldset>
+  </div>
 </template>
 
 <script>
-import { required } from "vuelidate/lib/validators";
+import { required, minLength } from "vuelidate/lib/validators";
 import GovukErrorMessage from "../components/GovukErrorMessage";
 import GovukFieldsetLegend from "../components/GovukFieldsetLegend";
 import GovukLabel from "../components/GovukLabel";
@@ -32,8 +48,10 @@ export default {
   },
   data: () => {
     return {
-      inputValue: '',
-    }
+      name: "",
+      age: 0,
+      inputValue: "",
+    };
   },
   props: {
     formData: {
@@ -42,8 +60,9 @@ export default {
     },
   },
   validations: {
-    name: {
+    inputValue: {
       required,
+      minLength: minLength(4),
     },
   },
   computed: {
@@ -52,8 +71,22 @@ export default {
       return listeners;
     },
   },
+  methods: {
+    setInputValue(value) {
+      this.$store.dispatch("updateValidData", value);
+    },
+    validateInputValue(value) {
+      this.inputValue = value;
+      this.$v.inputValue.$touch();
+      if (!this.$v.inputValue.$invalid) {
+        this.$emit("continue");
+      }
+    },
+  },
   mounted() {
-    this.inputValue = this.formData['Name'];
+    if (this.formData["Name"]) {
+      this.inputValue = this.formData["Name"];
+    }
   },
 };
 </script>
