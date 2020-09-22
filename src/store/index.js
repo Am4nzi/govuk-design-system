@@ -10,17 +10,7 @@ export default new Vuex.Store({
       dateOfBirth: null,
       gender: null,
     },
-    questionsData: [
-      {
-        questionName: "Name",
-      },
-      {
-        questionName: "Date of Birth",
-      },
-      {
-        questionName: "Gender",
-      },
-    ],
+    questionsNames: ["Name", "Date of Birth", "Gender"],
     summaryListActive: false,
     allQuestionsAnswered: false,
     currentQuestionInputValue: "",
@@ -29,9 +19,9 @@ export default new Vuex.Store({
     allQuestionsAnswered: (state) => state.allQuestionsAnswered,
     formData: (state) => state.formData,
     inputValue: (state) => state.currentQuestionInputValue,
-    questionsData: (state) => state.questionsData,
+    questionsNames: (state) => state.questionsNames,
     summaryListActive: (state) => state.summaryListActive,
-    totalQuestions: (state) => state.questionsData.length - 1,
+    totalQuestions: (state) => state.questionsNames.length - 1,
   },
   mutations: {
     setAllQuestionsAnswered: (state, value) =>

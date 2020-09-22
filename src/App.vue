@@ -3,6 +3,7 @@
     <div>
       <GovukHeader />
       <GovukBackLink
+        class="pointer-cursor"
         v-if="currentQuestionNumber > 0 || allQuestionsAnswered"
         :link-action="goBackOneStep"
       />
@@ -12,7 +13,7 @@
             ref="formQuestion"
             @input="getQuestionInputValue"
             @continue="navigateToNextRoute"
-            :form-data="formData"
+            :form-data="formInputData"
           />
           <GovukButton
             :button-text="summaryListActive ? 'Submit' : 'Continue'"
@@ -48,7 +49,7 @@ export default {
     return {
       currentQuestionNumber: 0,
       formMultipleInputData: {},
-      formData: {
+      formInputData: {
         ["Name"]: "",
         ["Date of Birth"]: "",
         ["Gender"]: "",
@@ -59,7 +60,7 @@ export default {
     ...mapGetters([
       "allQuestionsAnswered",
       "inputValue",
-      "questionsData",
+      "questionsNames",
       "summaryListActive",
       "totalQuestions",
     ]),
@@ -67,7 +68,7 @@ export default {
       if (this.allQuestionsAnswered) {
         return this.$route.name;
       } else {
-        return this.questionsData[this.currentQuestionNumber].questionName;
+        return this.questionsNames[this.currentQuestionNumber];
       }
     },
   },
@@ -78,12 +79,12 @@ export default {
       if (multipleInputProperty) {
         this.formMultipleInputData[multipleInputProperty] = questionInputValues;
         let questionPropertiesArray = Object.values(this.formMultipleInputData);
-        this.formData[this.currentQuestionName] = questionPropertiesArray.join(
+        this.formInputData[this.currentQuestionName] = questionPropertiesArray.join(
           " "
         );
         //Handle cases where there is a single input
       } else {
-        this.formData[this.currentQuestionName] = questionInputValues;
+        this.formInputData[this.currentQuestionName] = questionInputValues;
       }
     },
     goBackOneStep() {
@@ -118,7 +119,7 @@ export default {
       }
     },
     submitFormDataToStore() {
-      this.$store.dispatch("updateUserDetails", this.formData);
+      this.$store.dispatch("updateUserDetails", this.formInputData);
     },
   },
 };
@@ -131,5 +132,8 @@ body {
 }
 #app {
   -webkit-font-smoothing: antialiased;
+}
+.pointer-cursor {
+    cursor: pointer;
 }
 </style>
