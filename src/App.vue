@@ -65,7 +65,7 @@ export default {
       "allQuestionsAnswered",
     ]),
     currentQuestionName() {
-      if (this.summaryListActiveStatus) {
+      if (this.allQuestionsAnswered) {
         return this.$route.name;
       } else {
         return this.questionsData[this.currentQuestionNumber].questionName;
