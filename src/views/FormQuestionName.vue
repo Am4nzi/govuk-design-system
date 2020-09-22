@@ -3,14 +3,18 @@
     class="govuk-form-group"
     :class="{
       'govuk-form-group--error':
-        $v.inputValue.$dirty && !$v.inputValue.required,
+        $v.inputValue.$dirty && (!$v.inputValue.required || !$v.inputValue.firstAndSecondNameRequired),
     }"
   >
     <fieldset class="govuk-fieldset">
       <GovukFieldsetLegend legend-text="What is your name?" />
       <GovukErrorMessage
         v-if="$v.inputValue.$dirty && !$v.inputValue.required"
-        error-message="Please enter your full name"
+        error-message="Please enter your name"
+      />
+      <GovukErrorMessage
+          v-else-if="$v.inputValue.$dirty && !$v.inputValue.firstAndSecondNameRequired"
+          error-message="Please enter both your first and second name"
       />
       <div
         class="govuk-form-group"
@@ -33,7 +37,7 @@
 </template>
 
 <script>
-import { required, minLength } from "vuelidate/lib/validators";
+import { required } from "vuelidate/lib/validators";
 import GovukErrorMessage from "../components/GovukErrorMessage";
 import GovukFieldsetLegend from "../components/GovukFieldsetLegend";
 import GovukLabel from "../components/GovukLabel";
@@ -59,7 +63,7 @@ export default {
   validations: {
     inputValue: {
       required,
-      minLength: minLength(4),
+      firstAndSecondNameRequired: value => /^[a-zA-Z]+ [a-zA-Z]+$/.test(value)
     },
   },
   computed: {
