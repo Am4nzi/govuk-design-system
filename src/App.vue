@@ -4,10 +4,10 @@
       <GovukHeader />
       <GovukBackLink
         v-if="currentQuestionNumber > 0 || allQuestionsAnswered"
-        :link-action="navigateToPreviousRoute"
+        :link-action="goBackOneStep"
       />
       <div class="govuk-width-container">
-        <main class="govuk-main-wrapper" id="main-content" role="main">
+        <main class="govuk-main-wrapper" id="main-content">
           <router-view
             ref="formQuestion"
             @input="getQuestionInputValue"
@@ -15,7 +15,7 @@
             :form-data="formData"
           />
           <GovukButton
-            :button-text="summaryListActiveStatus ? 'Submit' : 'Continue'"
+            :button-text="summaryListActive ? 'Submit' : 'Continue'"
             :button-action="runValidator"
           />
         </main>
@@ -47,8 +47,7 @@ export default {
   data: () => {
     return {
       currentQuestionNumber: 0,
-      summaryListActive: false,
-      questionProperties: {},
+      formMultipleInputData: {},
       formData: {
         ["Name"]: "",
         ["Date of Birth"]: "",
@@ -58,11 +57,11 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "questionsData",
-      "totalQuestions",
-      "summaryListActiveStatus",
-      "inputValue",
       "allQuestionsAnswered",
+      "inputValue",
+      "questionsData",
+      "summaryListActive",
+      "totalQuestions",
     ]),
     currentQuestionName() {
       if (this.allQuestionsAnswered) {
@@ -73,18 +72,21 @@ export default {
     },
   },
   methods: {
-    getQuestionInputValue(questionInputValues, questionProperty) {
-      if (questionProperty) {
-        this.questionProperties[questionProperty] = questionInputValues;
-        let questionPropertiesArray = Object.values(this.questionProperties);
+    getQuestionInputValue(questionInputValues, multipleInputProperty) {
+      //Handle cases where question has more than one input
+      //Takes separate inputs and merges into one string
+      if (multipleInputProperty) {
+        this.formMultipleInputData[multipleInputProperty] = questionInputValues;
+        let questionPropertiesArray = Object.values(this.formMultipleInputData);
         this.formData[this.currentQuestionName] = questionPropertiesArray.join(
           " "
         );
+        //Handle cases where there is a single input
       } else {
         this.formData[this.currentQuestionName] = questionInputValues;
       }
     },
-    navigateToPreviousRoute() {
+    goBackOneStep() {
       if (this.allQuestionsAnswered) {
         this.$store.dispatch("updateSummaryListActive", false);
       }
@@ -92,18 +94,21 @@ export default {
       this.$router.go(-1);
     },
     runValidator() {
-      //TODO remove this condition once gender view has been fixed
-      if (this.$route.name === "Gender") {
+      //TODO remove this.$route.name === "Gender" condition once gender view has been fixed
+      if (this.$route.name === "Gender" || this.$route.name === "summaryList") {
         this.navigateToNextRoute();
       } else {
+        //Triggers validate method in child, which emits navigateToNextRoute() in App.vue if valid
         this.$refs.formQuestion.validateInputValue(this.inputValue);
       }
     },
     navigateToNextRoute() {
       if (this.summaryListActive) {
         this.submitFormDataToStore();
-        return;
-      } else if (this.currentQuestionNumber === this.totalQuestions || this.allQuestionsAnswered) {
+      } else if (
+        this.currentQuestionNumber === this.totalQuestions ||
+        this.allQuestionsAnswered
+      ) {
         this.$router.push({ name: "summaryList" });
         this.$store.dispatch("updateAllQuestionsAnswered", true);
         this.$store.dispatch("updateSummaryListActive", true);

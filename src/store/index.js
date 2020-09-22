@@ -30,7 +30,7 @@ export default new Vuex.Store({
     formData: (state) => state.formData,
     inputValue: (state) => state.currentQuestionInputValue,
     questionsData: (state) => state.questionsData,
-    summaryListActiveStatus: (state) => state.summaryListActive,
+    summaryListActive: (state) => state.summaryListActive,
     totalQuestions: (state) => state.questionsData.length - 1,
   },
   mutations: {
