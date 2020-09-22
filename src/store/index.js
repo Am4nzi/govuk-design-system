@@ -13,56 +13,41 @@ export default new Vuex.Store({
     questionsData: [
       {
         questionName: "Name",
-        questionSlug: "name",
-        questionId: 1,
       },
       {
         questionName: "Date of Birth",
-        questionSlug: "date-of-birth",
-        questionId: 2,
       },
       {
         questionName: "Gender",
-        questionSlug: "gender",
-        questionId: 3,
       },
     ],
-    formErrorIsActive: false,
     summaryListActive: false,
     allQuestionsAnswered: false,
     currentQuestionInputValue: "",
   },
+  getters: {
+    allQuestionsAnswered: (state) => state.allQuestionsAnswered,
+    formData: (state) => state.formData,
+    inputValue: (state) => state.currentQuestionInputValue,
+    questionsData: (state) => state.questionsData,
+    summaryListActiveStatus: (state) => state.summaryListActive,
+    totalQuestions: (state) => state.questionsData.length - 1,
+  },
   mutations: {
-    setAllQuestionsAnswered: (state, value) => (state.allQuestionsAnswered = value),
+    setAllQuestionsAnswered: (state, value) =>
+      (state.allQuestionsAnswered = value),
     setCurrentQuestionInputValue: (state, value) =>
       (state.currentQuestionInputValue = value),
-    setFormErrorIsActive: (state, value) => (state.formErrorIsActive = value),
     setFormDataFirstName: (state, value) => (state.formData["Name"] = value),
     setUserDetails: (state, userDetails) => (state.userDetails = userDetails),
     setSummaryListActive: (state, summaryListActiveState) =>
       (state.summaryListActive = summaryListActiveState),
   },
-  getters: {
-    allQuestionsAnswered: (state) => state.allQuestionsAnswered,
-    formErrorIsActive: (state) => state.formErrorIsActive,
-    formData: (state) => state.formData,
-    nameValue: (state) => state.formData["Name"],
-    genderValue: (state) => state.formData["Gender"],
-    dateOfBirthDay: (state) => state.dateOfBirthRawValues.day,
-    dateOfBirthMonth: (state) => state.dateOfBirthRawValues.month,
-    dateOfBirthYear: (state) => state.dateOfBirthRawValues.year,
-    questionsData: (state) => state.questionsData,
-    totalQuestions: (state) => state.questionsData.length - 1,
-    summaryListActiveStatus: (state) => state.summaryListActive,
-    inputValue: (state) => state.currentQuestionInputValue,
-  },
   actions: {
     updateAllQuestionsAnswered: (context, value) =>
-        context.commit("setAllQuestionsAnswered", value),
+      context.commit("setAllQuestionsAnswered", value),
     updateValidData: (context, value) =>
       context.commit("setCurrentQuestionInputValue", value),
-    updateFormErrorIsActive: (context, value) =>
-      context.commit("setFormErrorIsActive", value),
     updateSummaryListActive: (context, value) =>
       context.commit("setSummaryListActive", value),
     updateUserDetails(context, formData) {
