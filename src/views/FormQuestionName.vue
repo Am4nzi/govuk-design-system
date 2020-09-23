@@ -3,7 +3,8 @@
     class="govuk-form-group"
     :class="{
       'govuk-form-group--error':
-        $v.inputValue.$dirty && (!$v.inputValue.required || !$v.inputValue.firstAndSecondNameRequired),
+        $v.inputValue.$dirty &&
+        (!$v.inputValue.required || !$v.inputValue.firstAndSecondNameRequired),
     }"
   >
     <fieldset class="govuk-fieldset">
@@ -13,14 +14,16 @@
         error-message="Please enter your name"
       />
       <GovukErrorMessage
-          v-else-if="$v.inputValue.$dirty && !$v.inputValue.firstAndSecondNameRequired"
-          error-message="Please enter both your first and second name"
+        v-else-if="
+          $v.inputValue.$dirty && !$v.inputValue.firstAndSecondNameRequired
+        "
+        error-message="Please enter both your first and second name"
       />
       <div
         class="govuk-form-group"
         :class="{ 'form-group--error': $v.inputValue.$error }"
       >
-        <GovukLabel form-question-label="Full name"/>
+        <GovukLabel form-question-label="Full name" />
         <div>
           <input
             class="govuk-input form__input"
@@ -60,11 +63,14 @@ export default {
       required: true,
     },
   },
-  validations: {
-    inputValue: {
-      required,
-      firstAndSecondNameRequired: value => /^[a-zA-Z]+ [a-zA-Z]+$/.test(value)
-    },
+  mounted() {
+    if (this.formData["Name"]) {
+      this.$store.dispatch(
+        "updateCurrentQuestionInputValue",
+        this.formData["Name"]
+      );
+      this.inputValue = this.formData["Name"];
+    }
   },
   computed: {
     listeners() {
@@ -84,11 +90,12 @@ export default {
       }
     },
   },
-  mounted() {
-    if (this.formData["Name"]) {
-      this.$store.dispatch("updateCurrentQuestionInputValue", this.formData["Name"]);
-      this.inputValue = this.formData["Name"];
-    }
+  validations: {
+    inputValue: {
+      required,
+      firstAndSecondNameRequired: (value) =>
+        /^[a-zA-Z]+ [a-zA-Z]+$/.test(value),
+    },
   },
 };
 </script>

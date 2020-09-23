@@ -13,8 +13,8 @@
         error-message="Please enter your full date of birth"
       />
       <GovukErrorMessage
-          v-if="$v.inputValue.$dirty && !$v.inputValue.mustBeNumber"
-          error-message="Date of birth must be a number"
+        v-if="$v.inputValue.$dirty && !$v.inputValue.mustBeNumber"
+        error-message="Date of birth must be a number"
       />
       <div>
         <div id="dob-hint" class="govuk-hint">"For example, 31 3 1980"</div>
@@ -82,9 +82,7 @@
         <input
           type="hidden"
           :value="inputValue"
-          @input="
-            setInputValue($event.target.value);
-          "
+          @input="setInputValue($event.target.value)"
         />
       </div>
     </fieldset>
@@ -116,6 +114,13 @@ export default {
       inputValue: "",
     },
   },
+  mounted() {
+    if (this.formData["Date of Birth"]) {
+      this.inputValueDay = this.formData["Date of Birth"].split(" ")[0];
+      this.inputValueMonth = this.formData["Date of Birth"].split(" ")[1];
+      this.inputValueYear = this.formData["Date of Birth"].split(" ")[2];
+    }
+  },
   computed: {
     listeners() {
       const { ...listeners } = this.$listeners;
@@ -128,20 +133,6 @@ export default {
         this.inputValueYear,
       ];
       return dateOfBirthValues.join(" ");
-    },
-  },
-  mounted() {
-    if (this.formData["Date of Birth"]) {
-      this.inputValueDay = this.formData["Date of Birth"].split(" ")[0];
-      this.inputValueMonth = this.formData["Date of Birth"].split(" ")[1];
-      this.inputValueYear = this.formData["Date of Birth"].split(" ")[2];
-    }
-  },
-  validations: {
-    inputValue: {
-      required,
-      dayRequired: (value) => value.length === 10,
-      mustBeNumber: value => /^[0-9]+ [0-9]+ [0-9]+$/.test(value)
     },
   },
   methods: {
@@ -163,6 +154,13 @@ export default {
       if (!this.$v.inputValue.$invalid) {
         this.$emit("continue");
       }
+    },
+  },
+  validations: {
+    inputValue: {
+      required,
+      dayRequired: (value) => value.length === 10,
+      mustBeNumber: (value) => /^[0-9]+ [0-9]+ [0-9]+$/.test(value),
     },
   },
 };
