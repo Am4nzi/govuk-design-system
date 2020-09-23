@@ -12,7 +12,7 @@
 <script>
 import GovukErrorMessage from "./GovukErrorMessage";
 import GovukFieldsetLegend from "./GovukFieldsetLegend";
-const mapGetters = require("vuex")["mapGetters"];
+import { mapGetters } from 'vuex';
 
 export default {
   name: "GovukFieldset",
