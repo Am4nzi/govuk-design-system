@@ -1,18 +1,15 @@
 <template>
   <fieldset class="govuk-fieldset">
     <GovukFieldsetLegend legend-text="What is your gender?" />
-    <GovukErrorMessage v-if="true" error-message="Dummy Message" />
     <div class="govuk-form-group">
       <div>
         <div class="govuk-radios govuk-radios--inline">
           <govukRadios
-            inputValue="Male"
-            label="Male"
-            @input="getQuestionInputValue"
-          />
-          <govukRadios
-            inputValue="Female"
-            label="Female"
+            v-for="gender in genderValues"
+            :key="gender"
+            :form-data="formData"
+            :inputValue="gender"
+            :label="gender"
             @input="getQuestionInputValue"
           />
         </div>
@@ -22,16 +19,26 @@
 </template>
 
 <script>
-import GovukErrorMessage from "../components/GovukErrorMessage";
 import GovukFieldsetLegend from "../components/GovukFieldsetLegend";
 import GovukRadios from "../components/GovukRadios";
 export default {
   name: "FormQuestionGender",
   inheritAttrs: false,
   components: {
-    GovukErrorMessage,
     GovukFieldsetLegend,
     GovukRadios,
+  },
+  data: () => {
+    return {
+      inputValue: "",
+      genderValues: ["Male", "Female"],
+    };
+  },
+  props: {
+    formData: {
+      type: Object,
+      required: true,
+    },
   },
   methods: {
     getQuestionInputValue(questionInputValue) {
