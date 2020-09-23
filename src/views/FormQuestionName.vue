@@ -86,6 +86,7 @@ export default {
   },
   mounted() {
     if (this.formData["Name"]) {
+      this.$store.dispatch("updateCurrentQuestionInputValue", this.formData["Name"]);
       this.inputValue = this.formData["Name"];
     }
   },

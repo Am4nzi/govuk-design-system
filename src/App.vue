@@ -63,9 +63,10 @@ export default {
       "questionsNames",
       "summaryListActive",
       "totalQuestions",
+      "changeAnswerActive",
     ]),
     currentQuestionName() {
-      if (this.allQuestionsAnswered) {
+      if (this.changeAnswerActive) {
         return this.$route.name;
       } else {
         return this.questionsNames[this.currentQuestionNumber];
@@ -79,19 +80,21 @@ export default {
       if (multipleInputProperty) {
         this.formMultipleInputData[multipleInputProperty] = questionInputValues;
         let questionPropertiesArray = Object.values(this.formMultipleInputData);
-        this.formInputData[this.currentQuestionName] = questionPropertiesArray.join(
-          " "
-        );
+        this.formInputData[
+          this.currentQuestionName
+        ] = questionPropertiesArray.join(" ");
         //Handle cases where there is a single input
       } else {
         this.formInputData[this.currentQuestionName] = questionInputValues;
       }
     },
     goBackOneStep() {
+      if (!this.summaryListActive) {
+        this.currentQuestionNumber--;
+      }
       if (this.allQuestionsAnswered) {
         this.$store.dispatch("updateSummaryListActive", false);
       }
-      this.currentQuestionNumber--;
       this.$router.go(-1);
     },
     runValidator() {
@@ -110,6 +113,7 @@ export default {
         this.currentQuestionNumber === this.totalQuestions ||
         this.allQuestionsAnswered
       ) {
+        this.$store.dispatch("updateChangeAnswerActive", false);
         this.$router.push({ name: "summaryList" });
         this.$store.dispatch("updateAllQuestionsAnswered", true);
         this.$store.dispatch("updateSummaryListActive", true);
@@ -134,6 +138,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 .pointer-cursor {
-    cursor: pointer;
+  cursor: pointer;
 }
 </style>

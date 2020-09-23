@@ -25,6 +25,7 @@ export default {
   methods: {
     navigateToQuestion(questionName) {
       this.$router.push({ name: questionName });
+      this.$store.dispatch("updateChangeAnswerActive", true);
       this.$store.dispatch("updateSummaryListActive", false);
     }
   },

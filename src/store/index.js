@@ -12,11 +12,13 @@ export default new Vuex.Store({
     },
     questionsNames: ["Name", "Date of Birth", "Gender"],
     summaryListActive: false,
+    changeAnswerActive: false,
     allQuestionsAnswered: false,
     currentQuestionInputValue: "",
   },
   getters: {
     allQuestionsAnswered: (state) => state.allQuestionsAnswered,
+    changeAnswerActive: (state) => state.changeAnswerActive,
     formData: (state) => state.formData,
     inputValue: (state) => state.currentQuestionInputValue,
     questionsNames: (state) => state.questionsNames,
@@ -26,6 +28,8 @@ export default new Vuex.Store({
   mutations: {
     setAllQuestionsAnswered: (state, value) =>
       (state.allQuestionsAnswered = value),
+    setChangeAnswerActive: (state, value) =>
+        (state.changeAnswerActive = value),
     setCurrentQuestionInputValue: (state, value) =>
       (state.currentQuestionInputValue = value),
     setFormDataFirstName: (state, value) => (state.formData["Name"] = value),
@@ -36,6 +40,8 @@ export default new Vuex.Store({
   actions: {
     updateAllQuestionsAnswered: (context, value) =>
       context.commit("setAllQuestionsAnswered", value),
+    updateChangeAnswerActive: (context, value) =>
+        context.commit("setChangeAnswerActive", value),
     updateCurrentQuestionInputValue: (context, value) =>
       context.commit("setCurrentQuestionInputValue", value),
     updateSummaryListActive: (context, value) =>
