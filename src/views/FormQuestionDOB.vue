@@ -3,13 +3,13 @@
     class="govuk-form-group"
     :class="{
       'govuk-form-group--error':
-        $v.inputValue.$dirty && !$v.inputValue.dayRequired,
+        $v.inputValue.$dirty && !$v.inputValue.noEmptyValues,
     }"
   >
     <fieldset class="govuk-fieldset">
       <GovukFieldsetLegend legend-text="What is your date of birth?" />
       <GovukErrorMessage
-        v-if="$v.inputValue.$dirty && !$v.inputValue.dayRequired"
+        v-if="$v.inputValue.$dirty && !$v.inputValue.noEmptyValues"
         error-message="Please enter your full date of birth"
       />
       <GovukErrorMessage
@@ -159,7 +159,7 @@ export default {
   validations: {
     inputValue: {
       required,
-      dayRequired: (value) => value.length === 10,
+      noEmptyValues: (value) => value.length === 10,
       mustBeNumber: (value) => /^[0-9]+ [0-9]+ [0-9]+$/.test(value),
     },
   },
