@@ -116,6 +116,10 @@ export default {
   },
   mounted() {
     if (this.formData["Date of Birth"]) {
+      this.$store.dispatch(
+        "updateCurrentQuestionInputValue",
+        this.formData["Date of Birth"]
+      );
       this.inputValueDay = this.formData["Date of Birth"].split(" ")[0];
       this.inputValueMonth = this.formData["Date of Birth"].split(" ")[1];
       this.inputValueYear = this.formData["Date of Birth"].split(" ")[2];

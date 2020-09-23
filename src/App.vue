@@ -99,7 +99,7 @@ export default {
     },
     runValidator() {
       //TODO remove this.$route.name === "Gender" condition once gender view has been fixed
-      if (this.$route.name === "Gender" || this.$route.name === "summaryList") {
+      if (this.$route.name === "Gender" || this.$route.name === "Summary List") {
         this.navigateToNextRoute();
       } else {
         //Triggers validate method in child, which emits navigateToNextRoute() in App.vue if valid
@@ -114,7 +114,7 @@ export default {
         this.allQuestionsAnswered
       ) {
         this.$store.dispatch("updateChangeAnswerActive", false);
-        this.$router.push({ name: "summaryList" });
+        this.$router.push({ name: "Summary List" });
         this.$store.dispatch("updateAllQuestionsAnswered", true);
         this.$store.dispatch("updateSummaryListActive", true);
       } else {

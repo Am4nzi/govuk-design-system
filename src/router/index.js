@@ -29,7 +29,7 @@ const routes = [
   },
   {
     path: "/summary-list",
-    name: "summaryList",
+    name: "Summary List",
     component: SummaryList,
   },
 ];
