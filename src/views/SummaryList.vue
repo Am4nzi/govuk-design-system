@@ -1,7 +1,7 @@
 <template>
   <div class="govuk-width-container">
     <GovukFieldsetLegend :legend-text="legendText" />
-    <GovukSummaryList :form-data="formData" />
+    <GovukSummaryList :form-data="formData" v-on:linkAction="navigateToQuestion" />
   </div>
 </template>
 
@@ -11,15 +11,22 @@ import GovukFieldsetLegend from "../components/GovukFieldsetLegend";
 
 export default {
   name: "SummaryList",
+  components: {
+    GovukSummaryList,
+    GovukFieldsetLegend,
+  },
   data: () => ({
     legendText: "Please review your details before submission",
   }),
   props: {
     formData: Object,
   },
-  components: {
-    GovukSummaryList,
-    GovukFieldsetLegend,
+  methods: {
+    navigateToQuestion(questionName) {
+      this.$router.push({ name: questionName });
+      this.$store.dispatch("updateChangeAnswerActive", true);
+      this.$store.dispatch("updateSummaryListActive", false);
+    }
   },
 };
 </script>

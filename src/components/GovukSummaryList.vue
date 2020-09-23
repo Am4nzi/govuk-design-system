@@ -5,7 +5,7 @@
         <dt class="govuk-summary-list__key">{{ key }}</dt>
         <dd class="govuk-summary-list__value"> {{ item }} </dd>
         <dd class="govuk-summary-list__actions">
-          <a href="#" @click="navigateToQuestion(key)">
+          <a href="#" @click="$emit('linkAction', key)">
             Change<span class="govuk-visually-hidden">
               contact information</span
             ></a
@@ -21,13 +21,6 @@ export default {
   name: "GovukSummaryList",
   props: {
     formData: Object,
-  },
-  methods: {
-    navigateToQuestion(questionName) {
-      this.$router.push({ name: questionName });
-      this.$store.dispatch("updateChangeAnswerActive", true);
-      this.$store.dispatch("updateSummaryListActive", false);
-    }
   },
 };
 </script>
