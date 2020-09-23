@@ -4,22 +4,24 @@
 
 ```
 App
-└───Layout view
-    │   │
-    │   └───Questions view
-    │       └───Components
-    │
-    └───────Summary view
-            └───Components
+└───<GovukHeader />
+    <GovukBackLink />
+            <router-view />
+    <GovukButton />     └─────────  <FormQuestionName />
+    <GovukFooter />     └─────────  <FormQuestionDOB />
+                        └─────────  <FormQuestionGender />     
+                        └─────────  <SummaryList />
+
 ```
 
 ## Notes
 
-- Prominent use of Vue Router to structure views and components
-- Components kept as dumb as possible, with data and functions passed in
-- Switch statements have been used to check which route user is on (by using named routes) and syncing data accordingly
-- A mixin 'getAndSetFormValues' is used to get and set values between components and Vuex
-  - Because date of birth had three separate fields, some logic had to be written in their corresponding Vuex mutations to merge them, a better solution could be found for this
+- Vuex no longer handles two-way data-binding, instead it is now passed from child to parent
+- Input values are no longer updated on user input, but instead populated with all form values on form submission
+- Continue button now takes user straight to summary list if 'change' link has been clicked
+- Navigation no longer relies on explicitly stating the route names, but instead increments through an array of route names (meaning you can change the order without having to change the nav logic)
+- Vuelidate introduced for form validation
+- mixins removed as no longer needed
 
 ## Installation
 
@@ -27,12 +29,3 @@ App
 2. Run `npm i` to install dependencies
 5. Run `npm run serve` to start the app in development mode
 6.  Navigate to `http://localhost:8080/`
-
-## Todos
-
-- I could have added more form validation rules (e.g. making sure date/month/year have max vlues), but I think I added enough for demonstration purposes
-
-
-## Bugs
-
-- Crown copyright logo does not appear
